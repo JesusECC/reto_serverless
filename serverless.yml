@@ -1,0 +1,55 @@
+# NOTE: update this with your service name
+service: reto-serverless
+
+# Create an optimized package for our functions 
+package:
+  individually: true
+
+plugins:
+  - serverless-bundle # Package our functions with Webpack
+  - serverless-offline
+  - serverless-dotenv-plugin # Load .env as environment variables
+
+resources:
+  # API Gateway Errors
+  - ${file(resources/api-gateway-errors.yml)}
+  - ${file(resources/dynamo-table.yml)}
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  region: us-east-1
+  lambdaHashingVersion: 20201221
+  memorySize: 128
+
+  environment:
+    tableName: Personas
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+      Resource: "arn:aws:dynamodb:us-east-1:*:*"
+
+functions:
+  listaPersonas:
+    handler: ./src/persona/handler.getPersonas
+    events:
+      - http:
+          path: personas
+          method: get
+  crear:
+    handler: ./src/persona/handler.setPersona
+    events:
+      - http:
+          path: persona
+          method: post
+          cors: true
+  listaPersona:
+    handler: ./src/persona/handler.getPersona
+    events:
+      - http:
+          path: persona/{id}
+          method: get
+          cors: true
