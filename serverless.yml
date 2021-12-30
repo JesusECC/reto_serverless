@@ -39,6 +39,7 @@ functions:
       - http:
           path: personas
           method: get
+          cors: true
   crear:
     handler: ./src/persona/handler.setPersona
     events:
