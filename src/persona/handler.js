@@ -34,7 +34,6 @@ const getPeople = (params) => new Promise((resolve, reject) => {
 });
 
 export const getPersona = handler(async (event, context, callback) => {
-  console.log('get person');
   let persona;
   const params = {
     TableName: process.env.tableName,
@@ -57,8 +56,6 @@ export const getPersona = handler(async (event, context, callback) => {
   } else {
     persona = result.Item;
   }
-  console.log('result ');
-  console.log(persona.id);
   return {
     error: false,
     message: 'Lista de persona',
@@ -93,7 +90,7 @@ export const setPersona = handler(async (event, context, callback) => {
     TableName: process.env.tableName,
     Item: savePerson(persona)
   };
-  const result = await dynamoDb.put(params);
+  await dynamoDb.put(params);
   return {
     error: false,
     message: 'creado con exito',

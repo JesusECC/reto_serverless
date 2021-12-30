@@ -48,7 +48,7 @@ const message = ({ time, ...rest }) => new Promise((resolve, reject) =>
 We have detailed instructions on how to upgrade your app to the v2.0 of the starter if you were using v1.x before. [Read about it here](https://github.com/AnomalyInnovations/serverless-nodejs-starter/releases/tag/v2.0).
 
 ### Requirements
-
+- [NODEJS: v.14.17.4](https://nodejs.org/download/release/v14.17.4/)
 - [Install the Serverless Framework](https://serverless.com/framework/docs/providers/aws/guide/installation/)
 - [Configure your AWS CLI](https://serverless.com/framework/docs/providers/aws/guide/credentials/)
 
@@ -117,9 +117,6 @@ To add environment variables to your project
 3. Uncomment `environment:` block in the `serverless.yml` and reference the environment variable as `${env:MY_ENV_VAR}`. Where `MY_ENV_VAR` is added to your `.env` file.
 4. Make sure to not commit your `.env`.
 
-#### TypeScript
-
-If [serverless-bundle](https://github.com/AnomalyInnovations/serverless-bundle) detects a `tsconfig.json` in your service root, it'll compile it using TypeScript. We have a separate starter for TypeScript here, [**Serverless TypeScript Starter**](https://github.com/AnomalyInnovations/serverless-typescript-starter).
 
 #### Linting
 
@@ -143,3 +140,42 @@ To [override the default config](https://eslint.org/docs/user-guide/configuring)
 ---
 
 This repo is maintained by [Serverless Stack](https://serverless-stack.com).
+
+---
+
+## Lista de apis
+- `Listar personas: ` obtiene el listado de personas
+  - GET  | http://localhost:3000/dev/personas
+
+- `Lista persona: ` obtener un recurso de personas específico
+  - GET  | http://localhost:3000/dev/persona/{id}
+- `Crear una persona: `se añade un registro con los datos enviador en el cuerpo de la peticion.
+  - POST | http://localhost:3000/dev/persona
+    ```
+    {
+        "nombre": "Jesus",
+        "altura": "158",
+        "masa": "32",
+        "color_pelo": "n/a",
+        "color_piel": "white, red",
+        "color_ojos": "red",
+        "Año_nacimiento": "unknown",
+        "genero": "n/a",
+        "pais_origen": "https://swapi.py4e.com/api/planets/1/",
+        "peliculas": [ "https://swapi.py4e.com/api/films/1/" ],
+        "especies": [ "https://swapi.py4e.com/api/species/2/" ],
+        "vehiculos": [],
+        "naves_espaciales": [],
+        "url": "https://swapi.py4e.com/api/people/8/"
+      }
+    ```
+
+## Lista de apis desplegadas en AWS
+- endpoints:
+  - GET - https://ub36l39av8.execute-api.us-east-1.amazonaws.com/dev/personas
+  - POST - https://ub36l39av8.execute-api.us-east-1.amazonaws.com/dev/persona
+  - GET - https://ub36l39av8.execute-api.us-east-1.amazonaws.com/dev/persona/{id}
+functions:
+  - listaPersonas: reto-serverless-dev-listaPersonas
+  - crear: reto-serverless-dev-crear
+  - listaPersona: reto-serverless-dev-listaPersona

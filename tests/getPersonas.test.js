@@ -4,7 +4,6 @@ test('getPersonas', async () => {
   const context = 'context';
   
   const callback = (error, response) => {
-    console.log(response)
     expect(response.statusCode).toEqual(200);
     expect(typeof response.body.data.Items).toBe(Object);
   };
