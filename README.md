@@ -15,7 +15,7 @@
 
 ## Descripción
 ***
-- crear una api en [Nodejs](https://nodejs.org) con el [framawork Serverless](https://www.serverless.com) para un despliegue en [AWS](https://aws.amazon.com).
+- Crear una API en [Nodejs](https://nodejs.org) con el [framawork Serverless](https://www.serverless.com) para un despliegue en [AWS](https://aws.amazon.com).
 - Adaptar y transformar los modelos de la API de prueba. Se tiene que mapear todos los nombres de atributos(modelos) del ingles al español.
 - Integrar la API de prueba [StarWars API](https://swapi.py4e.com/documentation)
 
