@@ -21,7 +21,7 @@
 
 ## Arquitectura
 ***
-![](Doc\arquitectura.png)
+![](https://github.com/JesusECC/reto_serverless/blob/main/Doc/arquitectura.png)
 ## Tecnologías
 ***
 Lista de tecnologías utilizadas:
