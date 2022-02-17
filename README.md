@@ -104,6 +104,7 @@ Para agregar variables de entorno a su proyecto
 
 ## Apis
 ***
+### PERSONAS
 - `Listar personas: ` obtiene el listado de personas
   - GET  | http://localhost:3000/dev/personas
 
@@ -129,6 +130,39 @@ Para agregar variables de entorno a su proyecto
         "url": "https://swapi.py4e.com/api/people/8/"
       }
     ```
+- `Listar de naves estelares: ` obtiene el listado de naves estelares
+  - GET  | http://localhost:3000/dev/list/starships
+
+### STARSHIP
+- `Lista de la nave estelar: ` obtener los datos de una nave estelar en específico, buscamos en la BD, si no la encontramos consultamos a la api [swapi](https://swapi.py4e.com/documentation#starships), una vez obteniada la informacion la guardo en la DB y retorno la información.
+  - GET  | http://localhost:3000/dev/starship/{id}
+- `Crear una nave estelar: `se añade un registro con los datos enviador en el cuerpo de la peticion.
+  - POST | http://localhost:3000/dev/add/starship
+    ```
+    {
+    "nombre": "stelar56",
+    "modelo": "ZRT",
+    "fabricante": "BMW",
+    "costo_en_créditos": "3500000",
+    "longitud": "150",
+    "velocidad_atmosferica_maxima": "950",
+    "tripulación": "30-165",
+    "pasajeros": "600",
+    "Capacidad_carga": "3000000",
+    "consumibles": "1 year",
+    "calificacion_hiperimpulsor": "2.0",
+    "clase_nave_estelar": "corvette",
+    "pilotos": [],
+    "pelicula": [
+        "https://swapi.py4e.com/api/films/1/",
+        "https://swapi.py4e.com/api/films/3/",
+        "https://swapi.py4e.com/api/films/6/"
+    ],
+    "url": "https://swapi.py4e.com/api/starships/2/",
+    "creado": "2014-12-10T14:20:33.369000Z",
+    "editado": "2014-12-20T21:23:49.867000Z"
+}
+    ```
 ## Despliegue
 ***
 El despliegue se realiza en los servicios de AWS, usando [AWS CloudFormation](https://aws.amazon.com/es/cloudformation/)
@@ -139,10 +173,9 @@ El despliegue se realiza en los servicios de AWS, usando [AWS CloudFormation](ht
 
 ## Lista de apis desplegadas en AWS
 - endpoints:
-  - GET - https://ub36l39av8.execute-api.us-east-1.amazonaws.com/dev/personas
-  - POST - https://ub36l39av8.execute-api.us-east-1.amazonaws.com/dev/persona
+  - POST - https://ub36l39av8.execute-api.us-east-1.amazonaws.com/dev/add/persona
   - GET - https://ub36l39av8.execute-api.us-east-1.amazonaws.com/dev/persona/{id}
-- functions:
-  - listaPersonas: reto-serverless-dev-listaPersonas
-  - crear: reto-serverless-dev-crear
-  - listaPersona: reto-serverless-dev-listaPersona
+  - GET - https://ub36l39av8.execute-api.us-east-1.amazonaws.com/dev/list/person
+  - GET - https://ub36l39av8.execute-api.us-east-1.amazonaws.com/dev/list/starships
+  - POST - https://ub36l39av8.execute-api.us-east-1.amazonaws.com/dev/add/starship
+  - GET - https://ub36l39av8.execute-api.us-east-1.amazonaws.com/dev/starship/{id}

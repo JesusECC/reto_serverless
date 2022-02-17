@@ -10,3 +10,14 @@ Resources:
       KeySchema:
         - AttributeName: id
           KeyType: HASH
+  starshipDynamo:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: Starship
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH

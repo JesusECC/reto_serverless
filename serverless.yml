@@ -24,7 +24,9 @@ provider:
   memorySize: 128
 
   environment:
-    tableName: Personas
+    DYNAMODB_TABLE_PEOPLES: Personas
+    DYNAMODB_TABLE_STARSHIP: Starship
+    SWAPI_ENDPOINT: swapi.py4e.com
 
   iamRoleStatements:
     - Effect: Allow
@@ -33,24 +35,57 @@ provider:
       Resource: "arn:aws:dynamodb:us-east-1:*:*"
 
 functions:
-  listaPersonas:
-    handler: ./src/persona/handler.getPersonas
+  # listaPersonas:
+  #   handler: ./src/persona/handler.getPersonas
+  #   events:
+  #     - http:
+  #         path: personas
+  #         method: get
+  #         cors: true
+  crearPersona:
+    handler: ./src/modules/persona/create.handlerSetPeople
     events:
       - http:
-          path: personas
-          method: get
-          cors: true
-  crear:
-    handler: ./src/persona/handler.setPersona
-    events:
-      - http:
-          path: persona
+          path: /add/persona
           method: post
           cors: true
-  listaPersona:
-    handler: ./src/persona/handler.getPersona
+
+  detallePersona:
+    handler: ./src/modules/persona/detail.handlerGetPerson
     events:
       - http:
           path: persona/{id}
+          method: get
+          cors: true
+
+  listPersonas:
+    handler: ./src/modules/persona/list.handlerListPerson
+    events:
+      - http:
+          path: /list/person
+          method: get
+          cors: true
+
+  listNaveEstelar:
+    handler: ./src/modules/nave_estelar/list.handlerListStarships
+    events:
+      - http:
+          path: /list/starships
+          method: get
+          cors: true
+
+  crearStarship:
+    handler: ./src/modules/nave_estelar/create.handlerSetStarship
+    events:
+      - http:
+          path: /add/starship
+          method: post
+          cors: true
+
+  detalleStarship:
+    handler: ./src/modules/nave_estelar/detail.handlerGetStrship
+    events:
+      - http:
+          path: starship/{id}
           method: get
           cors: true
